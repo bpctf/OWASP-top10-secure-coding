@@ -34,10 +34,10 @@ def login(creds: LoginRequest, db: sqlite3.Connection = Depends(get_db)):
     cursor.execute(query)
     user = cursor.fetchone()
 
-    user_id, username, _, password = user
-    
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid username")
+    
+    user_id, username, _, password = user
     
     if password != creds.password:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid password")
