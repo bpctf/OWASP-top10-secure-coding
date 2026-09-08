@@ -43,5 +43,3 @@ def login(creds: LoginRequest, db: sqlite3.Connection = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid password")
 
     return {"success": True, "user": {"user_id": user_id, "username": username} }
-
-
